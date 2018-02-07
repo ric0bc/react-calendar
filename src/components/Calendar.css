@@ -18,7 +18,6 @@
 .hourValue {
   flex: 0 0 auto;
   height: 1152px;
-  height: auto;
   overflow-y: hidden;
 }
 
@@ -41,14 +40,10 @@
 
 .hourGrid {
   flex: 1 1 auto;
-  overflow-x: auto;
-  overflow-y: scroll; 
 }
 
 .hourRow {
-  display: inline-flex;
-  vertical-align: top;
-  min-width: 100%;
+  display: flex;
   position: relative;
 }
 
@@ -94,7 +89,7 @@
 .wrapper {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: calc(100% - 64px);
   display: flex;
 }
 
@@ -107,6 +102,13 @@
 .calendar-innergrid {
   display: flex;
   flex: 1 1 auto;
-  align-items: stretch;
-  overflow: hidden;
+  align-items: flex-start;
+  overflow-y: scroll;
+}
+
+.timetable-cell {
+  height: 48px;
+  text-align: center;
+  position: relative;
+  padding: 0 10px;
 }

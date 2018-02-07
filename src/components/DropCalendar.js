@@ -21,9 +21,9 @@ class DropCalendar extends Component {
 
   handleClick = (e) => {
     let pos = String(e.clientY / 48);
-    pos = pos.replace(/\,/g, '');
+    pos = pos.replace(/,/g, '');
     pos = parseInt(pos, 10);
-    console.log(pos);
+    console.log(this.node.getBoundingClientRect().top, e.pageY);
   }
 
   render() {
@@ -37,7 +37,7 @@ class DropCalendar extends Component {
               {
                 this.getHoursOfADay().map((hour) => (
                   <div 
-                    style={{height: '48px', textAlign: 'center', position:'relative'}} 
+                    className="timetable-cell"
                     key={hour}>
                     <span className="hour" >{hour}</span>
                   </div>
@@ -46,7 +46,7 @@ class DropCalendar extends Component {
               </div>
             </div>
             <div role="presentation" className="hourGrid">
-              <div role="row" className="hourRow" onClick={this.handleClick}>
+              <div role="row" className="hourRow" onClick={this.handleClick} ref={(ref) => this.node = ref}>
                 <div>
                   { this.getHoursOfADay().map((hour) => (
                       <div 
