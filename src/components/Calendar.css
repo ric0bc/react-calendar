@@ -1,18 +1,25 @@
-.mainCalendar {
-  height: 100%;
-  overflow: hidden;
+.main-calendar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow-y: auto;
+  outline: none;
 }
 
-.dayGrid {
+.calendar-grid {
+  height: 100%;
+  position: relative;
+  overflow: hidden;
   display: flex;
-  flex: 1 1 auto;
-  overflow-y: scroll;
-  align-items: flex-start;
 }
 
 .hourValue {
   flex: 0 0 auto;
   height: 1152px;
+  height: auto;
+  overflow-y: hidden;
 }
 
 .innerValue {
@@ -27,16 +34,22 @@
 
 .hour {
   position: relative;
-  top: -6px;
+  top: -7px;
+  font-size: 10px;
+  display: block;
 }
 
 .hourGrid {
   flex: 1 1 auto;
+  overflow-x: auto;
+  overflow-y: scroll; 
 }
 
 .hourRow {
+  display: inline-flex;
+  vertical-align: top;
+  min-width: 100%;
   position: relative;
-  display: flex;
 }
 
 .hourLine {
@@ -57,4 +70,43 @@
   height: 300px;
   background-color: red;
   top: 144px;
+}
+
+.events {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.grid-cell {
+  position: relative;
+  flex: 1 0 auto;
+  overflow: hidden;
+}
+
+.mainGrid {
+  position: relative;
+  display: flex;
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+
+.wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.calendar-wrapper {
+  flex: 1 1 auto;
+  overflow: hidden;
+  position: relative;
+}
+
+.calendar-innergrid {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: stretch;
+  overflow: hidden;
 }
