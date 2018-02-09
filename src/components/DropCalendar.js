@@ -1,9 +1,36 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 
 import Event from './Event';
 
 
 class DropCalendar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      events: [
+        {
+         
+            id: 'asdf123',
+            date: moment().date(),
+            timeStart: moment({ hour:9, minute:15 }).format('HH:mm'),
+            timeEnd: moment({ hour:15, minute:0 }).format('HH:mm'),
+            eventSize: 276,
+            eventPosition: 444,
+         
+        },
+        {
+            id: 'faffa23',
+            date: moment().date(),
+            timeStart: moment({ hour:2, minute:15 }).format('HH:mm'),
+            timeEnd: moment({ hour:8, minute:0 }).format('HH:mm'),
+            eventSize: 276,
+            eventPosition: 108,
+         
+        }
+      ]
+    }
+  }
 
   getHoursOfADay = () => {
     let hours = [];
@@ -20,10 +47,31 @@ class DropCalendar extends Component {
   }
 
   handleClick = (e) => {
-    let pos = String(e.clientY / 48);
+    const clientRectTop = this.node.getBoundingClientRect().top;
+    let positiveNr = clientRectTop > 0 ? -clientRectTop : Math.abs(this.node.getBoundingClientRect().top);
+    let pos = String((positiveNr + e.pageY)/48);
     pos = pos.replace(/,/g, '');
     pos = parseInt(pos, 10);
-    console.log(this.node.getBoundingClientRect().top, e.pageY);
+    console.log(pos);
+
+    // Push new Event
+    const state = {
+      ...this.state,
+      events:[
+        ...this.state.events,
+        {
+          id:'123114',
+          date: moment().date(),
+          timeStart: moment({ hour:2, minute:15 }).format('HH:mm'),
+          timeEnd: moment({ hour:8, minute:0 }).format('HH:mm'),
+          eventSize: 276,
+          eventPosition: 108,
+        }
+      ]
+    }
+    
+    this.setState(state);
+    
   }
 
   render() {
@@ -57,8 +105,7 @@ class DropCalendar extends Component {
                 </div>
                 <div role="gridcell" className="grid-cell">
                   <div role="presentation" className="events">
-                    <Event />
-                    <Event />
+                    <Event es={this.state.events} />
                   </div>
                 </div>
               </div>
