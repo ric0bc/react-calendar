@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import moment from 'moment';
+
+import {changeTime} from './action';
 
 
 class Event extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { events: [] };
-  }
 
   componentDidMount() {
-    this.setState({events: this.props.es})
   }
 
   dateHelperSize = (event) => {
@@ -29,67 +27,38 @@ class Event extends Component {
 
     event.preventDefault();
 
-    let index;
-    index = [...this.state.events].findIndex(i => i.id === e.id);
-
     const newEvent = {
       ...e,
       eventSize: this.dateHelperSize(e),
       eventPosition: this.dateHelperPosition(e)
     }
 
-    const state = {
-      ...this.state,
-      events: this.replaceObjectInArray([...this.state.events], index, newEvent)
-    }
-    this.setState(state)
+    this.props.changeTime(newEvent);
+
     
   }
-
-  replaceObjectInArray = (array, newIndex, object) => {
-    return array.map((item, index) => {
-      if(index !== newIndex){
-        return item
-      }
-      return {...item, ...object}
-    })
-  }
-
   handleChange = (event, e, key) => {
-
-    let index;
-    index = [...this.state.events].findIndex(i => i.id === e.id);
 
     const newEvent = {
       ...e,
       [key]: event.target.value
     }
 
-    const state = {
-      ...this.state,
-      events: this.replaceObjectInArray([...this.state.events], index, newEvent)
-    }
-
-    this.setState(state)
-    
+    this.props.changeTime(newEvent);
   }
 
   render() {
-    const { es } = this.props;
-    const events = this.state.events.length > 0 ? this.state.events : [];
-    
-    
-    console.log(es.map((e) => console.log(e)));
-    console.log(this.state.events)
+    const { events } = this.props;
+    // const events = this.props.events.length > 0 ? this.props.events : [];
+
     return (
       events.map((e,i) => {
-        // let key = Object.keys(e)[0];
         return   (
-          <div className="event" key={e.id} style={{height: this.state.events[i].eventSize, top: this.state.events[i].eventPosition}} >
-            {this.state.events[i].timeStart ? `EventStart: ${this.state.events[i].timeStart} / EventEnd: ${this.state.events[i].timeEnd}` : 'Event'}
-            <form onSubmit={(event) => this.handleSubmit(event, this.state.events[i])}>
-              <input name="startDate" value={this.state.events[i].timeStart} type="time" placeholder="Start Date" onChange={(event) => this.handleChange(event, this.state.events[i], 'timeStart')} />
-              <input name="endDate" value={this.state.events[i].timeEnd}  type="time" placeholder="End Date" onChange={(event) => this.handleChange(event, this.state.events[i], 'timeEnd')} />
+          <div className="event" key={e.id} style={{height: e.eventSize, top: e.eventPosition}} >
+            {e.timeStart ? `EventStart: ${e.timeStart} / EventEnd: ${e.timeEnd}` : 'Event'}
+            <form onSubmit={(event) => this.handleSubmit(event, e)}>
+              <input name="startDate" value={e.timeStart} type="time" placeholder="Start Date" onChange={(event) => this.handleChange(event, e, 'timeStart')} />
+              <input name="endDate" value={e.timeEnd}  type="time" placeholder="End Date" onChange={(event) => this.handleChange(event, e, 'timeEnd')} />
               <input type="submit" value="submit" />
             </form>
           </div>
@@ -99,4 +68,4 @@ class Event extends Component {
   }
 }
 
-export default Event
+export default connect(null, {changeTime})(Event)

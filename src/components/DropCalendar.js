@@ -1,35 +1,16 @@
 import React, { Component } from 'react';
-import moment from 'moment';
+import { connect } from 'react-redux';
 
+import { getEvents, addEvent } from './action';
 import Event from './Event';
 
 
 class DropCalendar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      events: [
-        {
-         
-            id: 'asdf123',
-            date: moment().date(),
-            timeStart: moment({ hour:9, minute:15 }).format('HH:mm'),
-            timeEnd: moment({ hour:15, minute:0 }).format('HH:mm'),
-            eventSize: 276,
-            eventPosition: 444,
-         
-        },
-        {
-            id: 'faffa23',
-            date: moment().date(),
-            timeStart: moment({ hour:2, minute:15 }).format('HH:mm'),
-            timeEnd: moment({ hour:8, minute:0 }).format('HH:mm'),
-            eventSize: 276,
-            eventPosition: 108,
-         
-        }
-      ]
-    }
+
+  componentDidMount() {
+    const { getEvents } = this.props;
+
+    getEvents();
   }
 
   getHoursOfADay = () => {
@@ -42,7 +23,6 @@ class DropCalendar extends Component {
         hours.push(`${i}:00`)
       }
     }
-
     return hours;
   }
 
@@ -55,22 +35,16 @@ class DropCalendar extends Component {
     console.log(pos);
 
     // Push new Event
-    const state = {
-      ...this.state,
-      events:[
-        ...this.state.events,
-        {
-          id:'123114',
-          date: moment().date(),
-          timeStart: moment({ hour:2, minute:15 }).format('HH:mm'),
-          timeEnd: moment({ hour:8, minute:0 }).format('HH:mm'),
-          eventSize: 276,
-          eventPosition: 108,
-        }
-      ]
-    }
+    // const event = {
+    //   id:'123114',
+    //   date: moment().date(),
+    //   timeStart: moment({ hour:2, minute:15 }).format('HH:mm'),
+    //   timeEnd: moment({ hour:8, minute:0 }).format('HH:mm'),
+    //   eventSize: 276,
+    //   eventPosition: 108,
+    // }
     
-    this.setState(state);
+    // this.props.addEvent(event);
     
   }
 
@@ -105,7 +79,7 @@ class DropCalendar extends Component {
                 </div>
                 <div role="gridcell" className="grid-cell">
                   <div role="presentation" className="events">
-                    <Event es={this.state.events} />
+                    <Event events={this.props.events} />
                   </div>
                 </div>
               </div>
@@ -117,4 +91,8 @@ class DropCalendar extends Component {
   }
 }
 
-export default DropCalendar
+const mapStateToProps = (state) => ({
+  events: state.eventsState.events
+})
+
+export default connect(mapStateToProps, {getEvents, addEvent})(DropCalendar);
