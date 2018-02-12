@@ -7,9 +7,6 @@ import {changeTime} from './action';
 
 class Event extends Component {
 
-  componentDidMount() {
-  }
-
   dateHelperSize = (event) => {
     const a = moment.duration(event.timeStart).asMinutes();
     const b = moment.duration(event.timeEnd).asMinutes();
@@ -47,6 +44,11 @@ class Event extends Component {
     this.props.changeTime(newEvent);
   }
 
+  handleClick = (e) => {
+    e.stopPropagation();
+    console.log('click');
+  }
+
   render() {
     const { events } = this.props;
     // const events = this.props.events.length > 0 ? this.props.events : [];
@@ -54,7 +56,7 @@ class Event extends Component {
     return (
       events.map((e,i) => {
         return   (
-          <div className="event" key={e.id} style={{height: e.eventSize, top: e.eventPosition}} >
+          <div className="event" key={e.id} style={{height: e.eventSize, top: e.eventPosition}} onClick={this.handleClick} >
             {e.timeStart ? `EventStart: ${e.timeStart} / EventEnd: ${e.timeEnd}` : 'Event'}
             <form onSubmit={(event) => this.handleSubmit(event, e)}>
               <input name="startDate" value={e.timeStart} type="time" placeholder="Start Date" onChange={(event) => this.handleChange(event, e, 'timeStart')} />

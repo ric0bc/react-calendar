@@ -2,6 +2,7 @@ import moment from 'moment';
 export const GET_EVENTS = 'GET_EVENTS';
 export const CHANGE_TIME = 'CHANGE_TIME';
 export const ADD_EVENT = 'ADD_EVENT';
+export const ADD_EVENT_TRIGGER = 'ADD_EVENT_TRIGGER';
 
 const events = [
   {
@@ -40,5 +41,11 @@ export function addEvent (event) {
   return {
     type: ADD_EVENT,
     event
+  }
+}
+
+export function addEventTrigger () {
+  return {
+    type: ADD_EVENT_TRIGGER
   }
 }

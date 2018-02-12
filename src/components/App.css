@@ -20,6 +20,10 @@ body {
   height: 100%;
 }
 
+.App-wrapper {
+  height: 100%;
+}
+
 .App-header {
   background-color: #222;
   height: 64px;

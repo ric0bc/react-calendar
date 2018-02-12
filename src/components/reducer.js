@@ -1,7 +1,13 @@
-import { GET_EVENTS, CHANGE_TIME, ADD_EVENT } from './action'
+import { 
+  GET_EVENTS, 
+  CHANGE_TIME, 
+  ADD_EVENT, 
+  ADD_EVENT_TRIGGER,
+} from './action'
 
 const INITIAL_STATE = {
-  events: []
+  events: [],
+  isAddingNewEvent: false
 }
 
 const replaceObjectInArray = (array, newIndex, object) => {
@@ -16,7 +22,9 @@ const replaceObjectInArray = (array, newIndex, object) => {
 function eventsReducer (state = INITIAL_STATE, action ) {
 
   let index;
-  index = [...state.events].findIndex(i => i.id === action.event.id);
+  if(action.event) {
+    index = [...state.events].findIndex(i => i.id === action.event.id);
+  }
 
   switch (action.type) {
     case GET_EVENTS :
@@ -38,6 +46,11 @@ function eventsReducer (state = INITIAL_STATE, action ) {
           action.event,
           ...state.events.slice(lastIndex)
         ]
+      }
+    case ADD_EVENT_TRIGGER :
+      return {
+        ...state,
+        isAddingNewEvent: !state.isAddingNewEvent
       }
     default :
       return state

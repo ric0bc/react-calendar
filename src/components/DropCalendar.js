@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import moment from 'moment';
 
-import { getEvents, addEvent } from './action';
+import { getEvents, addEvent, addEventTrigger } from './action';
 import Event from './Event';
 
 
@@ -32,7 +34,7 @@ class DropCalendar extends Component {
     let pos = String((positiveNr + e.pageY)/48);
     pos = pos.replace(/,/g, '');
     pos = parseInt(pos, 10);
-    console.log(pos);
+    console.log(moment({hour:pos, minute: 0}).format('HH:mm'));
 
     // Push new Event
     // const event = {
@@ -45,6 +47,13 @@ class DropCalendar extends Component {
     // }
     
     // this.props.addEvent(event);
+
+      // this.props.addEventTrigger();
+
+    // this.props.history.push({
+    //   pathname: "/new-event",
+    //   position: pos
+    // });
     
   }
 
@@ -95,4 +104,9 @@ const mapStateToProps = (state) => ({
   events: state.eventsState.events
 })
 
-export default connect(mapStateToProps, {getEvents, addEvent})(DropCalendar);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    {getEvents, addEvent, addEventTrigger}
+  )(DropCalendar)
+);
