@@ -7,7 +7,6 @@ import {
 
 const INITIAL_STATE = {
   events: [],
-  newEvent: null
 }
 
 const replaceObjectInArray = (array, newIndex, object) => {
