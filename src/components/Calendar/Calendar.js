@@ -20,10 +20,7 @@ class Calendar extends Component {
 
     
   }
-
   
-
-    
   render() {
     
     return (

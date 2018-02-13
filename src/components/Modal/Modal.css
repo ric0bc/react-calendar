@@ -1,0 +1,74 @@
+.Modal-wrapper {
+  position: absolute;
+  pointer-events: none;
+  width: 0!important;
+  height: 0!important;
+  top: 0;
+  left: 0;
+}
+
+.Modal-window {
+  z-index: 1004;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  pointer-events: none;
+}
+
+.Modal-border {
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  transition: transform .4s cubic-bezier(0.4,0.0,0.2,1);
+  display: flex;
+  flex-direction: column;
+  -webkit-box-align: center;
+  box-align: center;
+  -webkit-box-orient: vertical;
+  box-orient: vertical;
+  backface-visibility: hidden;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.Modal-overlay {
+  pointer-events: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0,0,0,0.38);
+  z-index: 1001;
+}
+
+.Modal-main {
+  background-color: #fcfcfc;
+  width: 400px;
+  height: 200px;
+  pointer-events: auto;
+  -webkit-flex-shrink: 1;
+    flex-shrink: 1;
+    max-height: 100%;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-align-items: stretch;
+    align-items: stretch;
+    overflow: hidden;
+    -webkit-box-shadow: 0 24px 38px 3px rgba(0,0,0,0.14), 0 9px 46px 8px rgba(0,0,0,0.12), 0 11px 15px -7px rgba(0,0,0,0.2);
+    box-shadow: 0 24px 38px 3px rgba(0,0,0,0.14), 0 9px 46px 8px rgba(0,0,0,0.12), 0 11px 15px -7px rgba(0,0,0,0.2);
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    opacity: 0;
+    opacity: 1;
+    transform: none;
+}

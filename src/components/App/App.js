@@ -2,11 +2,16 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route} from 'react-router-dom';
 import { connect } from 'react-redux';
 import './App.css';
-import Modal from './Modal';
-import AddEvent from './AddEvent';
-import Calendar from './Calendar';
+import Modal from '../Modal/Modal';
+import AddEvent from '../Calendar/AddEvent';
+import Calendar from '../Calendar/Calendar';
+import { getEvents } from '../../actions/action';
 
 class App extends Component {
+  componentDidMount() {
+    this.props.getEvents();
+  }
+
   render() {
     return (
       <Router>
@@ -18,15 +23,11 @@ class App extends Component {
             <Route exact path="/" component={() => <Calendar /> } />
             <Route exact path="/new-event" component={() => <AddEvent />} />
           </div>
-          {this.props.isAddingNewEvent ? <Modal /> : null}
+          <Modal />
         </div>
       </Router>
     );
   }
 }
 
-const mapStateToProps = (state) => ({
-  isAdding: state.eventsState.isAddingNewEvent
-})
-
-export default connect(mapStateToProps, null)(App);
+export default connect(null, {getEvents})(App);

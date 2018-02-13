@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import moment from 'moment';
 
-import { getEvents, addEvent, addEventTrigger } from './action';
+import { getEvents, setModalData, openModal, addEvent } from '../../actions/action';
 import Event from './Event';
+import EventObject from './EventObject';
 
 
 class DropCalendar extends Component {
 
   componentDidMount() {
-    const { getEvents } = this.props;
-
-    getEvents();
   }
 
   getHoursOfADay = () => {
@@ -29,27 +26,25 @@ class DropCalendar extends Component {
   }
 
   handleClick = (e) => {
+
+    // Calc Position
     const clientRectTop = this.node.getBoundingClientRect().top;
-    let positiveNr = clientRectTop > 0 ? -clientRectTop : Math.abs(this.node.getBoundingClientRect().top);
+    let positiveNr = clientRectTop > 0 ? -clientRectTop : Math.abs(clientRectTop);
     let pos = String((positiveNr + e.pageY)/48);
     pos = pos.replace(/,/g, '');
     pos = parseInt(pos, 10);
-    console.log(moment({hour:pos, minute: 0}).format('HH:mm'));
-
-    // Push new Event
-    // const event = {
-    //   id:'123114',
-    //   date: moment().date(),
-    //   timeStart: moment({ hour:2, minute:15 }).format('HH:mm'),
-    //   timeEnd: moment({ hour:8, minute:0 }).format('HH:mm'),
-    //   eventSize: 276,
-    //   eventPosition: 108,
-    // }
     
-    // this.props.addEvent(event);
+    // Create new Event
+    const event = new EventObject('asdf3', pos, (pos + 1), true, clientRectTop);
+    
+    // Set Event data in Modal window
+    this.props.setModalData(event);
+    // Add to the events for displaying to user
+    this.props.addEvent(event);
+    // Open Modal window
+    this.props.openModal(true);
 
-      // this.props.addEventTrigger();
-
+    // On long click || dbclick
     // this.props.history.push({
     //   pathname: "/new-event",
     //   position: pos
@@ -58,7 +53,6 @@ class DropCalendar extends Component {
   }
 
   render() {
-   
     return (
       <div role="grid" className="calendar-grid">
         <div role="presentation" className="mainGrid">
@@ -101,12 +95,13 @@ class DropCalendar extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  events: state.eventsState.events
+  events: state.eventsState.events,
+  newEv: state.eventsState.newEvent
 })
 
 export default withRouter(
   connect(
     mapStateToProps,
-    {getEvents, addEvent, addEventTrigger}
+    {getEvents, setModalData, openModal, addEvent }
   )(DropCalendar)
 );
