@@ -1,7 +1,8 @@
-import { OPEN_MODAL, MODAL_DATA } from '../actions/action';
+import { OPEN_MODAL } from '../actions/action';
 
 const INITIAL_STATE = {
   bool: false,
+  event: '',
   modalData: null
 }
 
@@ -11,12 +12,8 @@ function modalReducer (state = INITIAL_STATE, action ) {
     case OPEN_MODAL :
       return {
         ...state,
-        bool: action.bool
-      }
-    case MODAL_DATA :
-      return {
-        ...state,
-        modalData: action.event
+        bool: action.bool,
+        event: action.event
       }
     default :
       return state

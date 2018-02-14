@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import { getEvents, setModalData, openModal, addEvent } from '../../actions/action';
+import { getEvents, openModal, addEvent } from '../../actions/action';
 import Event from './Event';
 import EventObject from './EventObject';
 
@@ -37,12 +37,10 @@ class DropCalendar extends Component {
     // Create new Event
     const event = new EventObject('asdf3', pos, (pos + 1), true, clientRectTop);
     
-    // Set Event data in Modal window
-    this.props.setModalData(event);
     // Add to the events for displaying to user
     this.props.addEvent(event);
     // Open Modal window
-    this.props.openModal(true);
+    this.props.openModal(true, event);
 
     // On long click || dbclick
     // this.props.history.push({
@@ -102,6 +100,6 @@ const mapStateToProps = (state) => ({
 export default withRouter(
   connect(
     mapStateToProps,
-    {getEvents, setModalData, openModal, addEvent }
+    {getEvents, openModal, addEvent }
   )(DropCalendar)
 );

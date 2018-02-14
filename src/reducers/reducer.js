@@ -1,12 +1,14 @@
 import { 
   GET_EVENTS, 
-  CHANGE_TIME, 
+  UPDATE_EVENT, 
   ADD_EVENT,
-  REMOVE_EVENT
+  REMOVE_EVENT,
+  GET_EVENT
 } from '../actions/action'
 
 const INITIAL_STATE = {
   events: [],
+  event: null
 }
 
 const replaceObjectInArray = (array, newIndex, object) => {
@@ -31,7 +33,12 @@ function eventsReducer (state = INITIAL_STATE, action ) {
         ...state,
         events: action.events
       }
-    case CHANGE_TIME: 
+    case GET_EVENT : 
+      return {
+        ...state,
+        event: [...state.events.filter(item => item.id === action.id)]
+      }
+    case UPDATE_EVENT: 
       return {
         ...state,
         events: replaceObjectInArray([...state.events], index, action.event)

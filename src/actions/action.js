@@ -1,8 +1,8 @@
 import moment from 'moment';
 export const GET_EVENTS = 'GET_EVENTS';
-export const CHANGE_TIME = 'CHANGE_TIME';
+export const UPDATE_EVENT = 'UPDATE_EVENT';
 export const ADD_EVENT = 'ADD_EVENT';
-export const MODAL_DATA = 'MODAL_DATA';
+export const GET_EVENT = 'GET_EVENT';
 export const OPEN_MODAL = 'OPEN_MODAL';
 export const REMOVE_EVENT = 'REMOVE_EVENT';
 
@@ -32,9 +32,16 @@ export function getEvents () {
   }
 }
 
-export function changeTime (event) {
+export function getEvent (id) {
   return {
-    type: CHANGE_TIME,
+    type: GET_EVENT,
+    id
+  }
+}
+
+export function updateEvent (event) {
+  return {
+    type: UPDATE_EVENT,
     event
   }
 }
@@ -53,16 +60,10 @@ export function removeEvent (event) {
   }
 }
 
-export function setModalData (event) {
-  return {
-    type: MODAL_DATA,
-    event
-  }
-}
-
-export function openModal (bool) {
+export function openModal (bool, event) {
   return {
     type: OPEN_MODAL,
-    bool
+    bool,
+    event
   }
 }

@@ -9,7 +9,7 @@ class Modal extends Component {
 
   handleClick = () => {
     this.props.openModal(false)
-    this.props.removeEvent(this.props.data);
+    this.props.removeEvent(this.props.event);
     
   }
 
@@ -23,7 +23,7 @@ class Modal extends Component {
               <div className="Modal-window">
                 <div className="Modal-border">
                   <div className="Modal-main">
-                    <NewModal data={this.props.data} />
+                    <NewModal />
                   </div>
                 </div>
               </div>
@@ -37,7 +37,7 @@ class Modal extends Component {
 }
 
 const MapStateToProps = (state) => ({
-  data: state.modalState.modalData,
+  event: state.modalState.event,
   isOpen: state.modalState.bool
 })
 
