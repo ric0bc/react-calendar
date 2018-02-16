@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
-import { getEvents, openModal, addEvent } from '../../actions/action';
-import Event from './Event';
-import EventObject from './EventObject';
+import { getEvents, openModal, addEvent } from '../../actions/action'
+import Event from './Event'
+import CHeader from './Header/CHeader'
+import EventObject from './EventObject'
 
 
 class DropCalendar extends Component {
@@ -53,6 +54,7 @@ class DropCalendar extends Component {
   render() {
     return (
       <div role="grid" className="calendar-grid">
+        <CHeader /> 
         <div role="presentation" className="mainGrid">
           <div role="presentation" className="calendar-innergrid">
             <div className="hourValue">
@@ -94,7 +96,8 @@ class DropCalendar extends Component {
 
 const mapStateToProps = (state) => ({
   events: state.eventsState.events,
-  newEv: state.eventsState.newEvent
+  newEv: state.eventsState.newEvent,
+  view: state.viewState.view,
 })
 
 export default withRouter(

@@ -3,6 +3,7 @@ import moment from 'moment';
 import 'moment/locale/de';
 
 import DropCalendar from './DropCalendar';
+import CalendarPicker from './Picker/CalendarPicker'
 import './Calendar.css';
 
 class Calendar extends Component {
@@ -25,6 +26,7 @@ class Calendar extends Component {
     
     return (
       <div className="wrapper">
+        <CalendarPicker />
         <div className="calendar-wrapper">
           <div role="main" className="main-calendar">
             <DropCalendar />

@@ -5,6 +5,7 @@ export const ADD_EVENT = 'ADD_EVENT';
 export const GET_EVENT = 'GET_EVENT';
 export const OPEN_MODAL = 'OPEN_MODAL';
 export const REMOVE_EVENT = 'REMOVE_EVENT';
+export const CHANGE_VIEW = 'CHANGE_VIEW';
 
 const events = [
   {
@@ -65,5 +66,12 @@ export function openModal (bool, event) {
     type: OPEN_MODAL,
     bool,
     event
+  }
+}
+
+export function changeView (view) {
+  return {
+    type: CHANGE_VIEW,
+    view
   }
 }

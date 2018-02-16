@@ -28,11 +28,21 @@ body {
   background-color: #222;
   height: 64px;
   color: white;
+  position: relative;
 }
 
 .App-title {
   font-size: 1.5em;
   line-height: 64px;
+}
+
+.c-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  width: 100px;
+  
 }
 
 @keyframes App-logo-spin {

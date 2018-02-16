@@ -13,6 +13,7 @@
   position: relative;
   overflow: hidden;
   display: flex;
+  flex-direction: column;
 }
 
 .hourValue {
@@ -112,3 +113,4 @@
   position: relative;
   padding: 0 10px;
 }
+
