@@ -7,7 +7,7 @@ import './CHeader.css'
 class CHeader extends Component {
 
   componentDidMount() {
-    console.log(moment())
+    
   }
 
   render() {

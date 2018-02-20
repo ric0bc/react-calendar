@@ -3,7 +3,7 @@ import moment from 'moment'
 
 import './CalendarPicker.css'
 
-class CalendarPicker extends React.Component {
+class CalendarPicker extends Component {
   constructor(props) {
     super(props);
     
@@ -98,7 +98,7 @@ class CalendarPicker extends React.Component {
   }
 }
 
-class DayNames extends React.Component {
+class DayNames extends Component {
     render() {
         return (
           <div className="row day-names">
@@ -114,7 +114,7 @@ class DayNames extends React.Component {
     }
 }
 
-class Week extends React.Component {
+class Week extends Component {
   render() {
     let days = [];
     let {
@@ -136,9 +136,12 @@ class Week extends React.Component {
           date: date
       };
       days.push(
-        <Day day={day}
+        <Day 
+          day={day}
+          key={day.number}
           selected={selected}
-          select={select}/>
+          select={select}
+        />
       );
 
       date = date.clone();
@@ -154,7 +157,7 @@ class Week extends React.Component {
 
 }
 
-class Day extends React.Component {
+class Day extends Component {
   render() {
     const {
       day,

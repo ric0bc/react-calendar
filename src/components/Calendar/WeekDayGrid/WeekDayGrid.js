@@ -1,17 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { withRouter, Route } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
-import { getEvents, openModal, addEvent } from '../../actions/action'
-import Event from './Event'
-import CHeader from './Header/CHeader'
-import EventObject from './EventObject'
+import { getEvents, openModal, addEvent } from '../../../actions/action'
+import Event from '../Event'
+import CHeader from '../Header/CHeader'
+import EventObject from '../EventObject'
 
-
-class DropCalendar extends Component {
-
-  componentDidMount() {
-  }
+class WeekDayGrid extends Component {
 
   getHoursOfADay = () => {
     let hours = [];
@@ -94,6 +90,7 @@ class DropCalendar extends Component {
   }
 }
 
+
 const mapStateToProps = (state) => ({
   events: state.eventsState.events,
   newEv: state.eventsState.newEvent,
@@ -104,5 +101,5 @@ export default withRouter(
   connect(
     mapStateToProps,
     {getEvents, openModal, addEvent }
-  )(DropCalendar)
+  )(WeekDayGrid)
 );
