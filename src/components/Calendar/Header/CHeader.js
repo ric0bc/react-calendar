@@ -7,7 +7,6 @@ import './CHeader.css'
 class CHeader extends Component {
 
   componentDidMount() {
-    
   }
 
   render() {
@@ -23,7 +22,7 @@ class CHeader extends Component {
                 <div className="header-title-wrap">
                   <h2 className="header-title">
                     <div className="day-name">{moment().format('dddd')}</div>
-                    <div className="day-number">{moment().week()}</div>
+                    <div className="day-number">{moment().format('D')}</div>
                   </h2>
                 </div>
               </div>

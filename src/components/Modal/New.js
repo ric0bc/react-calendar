@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import * as db from '../../firebase/db'
 import { dateHelperPosition, dateHelperSize } from '../../Helper/Helper';
 import { updateEvent, openModal } from '../../actions/action';
 
@@ -18,6 +19,9 @@ class New extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     this.props.openModal(false);
+    
+    // Firebase
+    db.doCreateEvent(this.state.event).then(snap => console.log(snap))
   }
 
   handleChange = (event, e) => {

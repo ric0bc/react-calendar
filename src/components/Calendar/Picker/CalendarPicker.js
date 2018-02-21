@@ -41,6 +41,16 @@ class CalendarPicker extends Component {
       selected: day.date,
       month: day.date.clone(),
     });
+
+    
+    const d = moment(day.date).format('D')
+    const m = moment(day.date).format('M')
+    const y = moment(day.date).format('Y')
+
+    this.props.history.push({
+      path: `${this.props.match.path}/day/${y}/${m}/${d}`,
+      state: { date: moment(day.date).format('D.M.Y')}
+    })
   }
 
   renderWeeks() {

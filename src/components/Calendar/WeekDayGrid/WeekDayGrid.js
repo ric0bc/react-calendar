@@ -5,21 +5,14 @@ import { withRouter } from 'react-router-dom'
 import { getEvents, openModal, addEvent } from '../../../actions/action'
 import Event from '../Event'
 import CHeader from '../Header/CHeader'
+import TimetableLeftPanel from './TimetableLeftPanel'
+import TimetableGrid from './TimetableGrid'
 import EventObject from '../EventObject'
 
 class WeekDayGrid extends Component {
 
-  getHoursOfADay = () => {
-    let hours = [];
-   
-    for(var i = 0; i < 24; i++){
-      if(i < 10) {
-        hours.push(`0${i}:00`)
-      } else {
-        hours.push(`${i}:00`)
-      }
-    }
-    return hours;
+  componentDidMount() {
+    console.log(this.props.location.state.date)
   }
 
   handleClick = (e) => {
@@ -39,6 +32,8 @@ class WeekDayGrid extends Component {
     // Open Modal window
     this.props.openModal(true, event);
 
+    
+
     // On long click || dbclick
     // this.props.history.push({
     //   pathname: "/new-event",
@@ -53,29 +48,10 @@ class WeekDayGrid extends Component {
         <CHeader /> 
         <div role="presentation" className="mainGrid">
           <div role="presentation" className="calendar-innergrid">
-            <div className="hourValue">
-              <div className="innerValue">
-              {
-                this.getHoursOfADay().map((hour) => (
-                  <div 
-                    className="timetable-cell"
-                    key={hour}>
-                    <span className="hour" >{hour}</span>
-                  </div>
-                ))
-              }
-              </div>
-            </div>
+            <TimetableLeftPanel />
             <div role="presentation" className="hourGrid">
               <div role="row" className="hourRow" onClick={this.handleClick} ref={(ref) => this.node = ref}>
-                <div>
-                  { this.getHoursOfADay().map((hour) => (
-                      <div 
-                        key={hour}
-                        className="hourLine">
-                      </div>
-                    )) }
-                </div>
+                <TimetableGrid />
                 <div role="gridcell" className="grid-cell">
                   <div role="presentation" className="events">
                     <Event events={this.props.events} />
